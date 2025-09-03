@@ -8,6 +8,7 @@ import AuthLayout from "./Layout/AuthLayout";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import AuthProvider from "./Provider/AuthProvider";
+import Doctors from "./Pages/Doctors";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")).render(
      <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main></Main>} />
+        <Route path="/doctors" element={<Doctors></Doctors>} />
 
         <Route path="auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />

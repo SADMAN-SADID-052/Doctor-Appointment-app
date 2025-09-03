@@ -1,11 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-
-import auth from "../Firebase/firebaselogin"
+import auth from "../Firebase/firebaselogin";
 import Swal from "sweetalert2";
-
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Login = () => {
   const { userLogin, setUser } = useContext(AuthContext);
@@ -14,9 +13,30 @@ const Login = () => {
 
   const provider = new GoogleAuthProvider();
 
+  // ✅ Role state (no default value)
+  const [role, setRole] = useState("");
+
   const handleGoogleLogin = () => {
+    if (!role) {
+      Swal.fire({
+        icon: "warning",
+        title: "Role Required",
+        text: "Please select a role before logging in with Google.",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
+
     signInWithPopup(auth, provider)
-      .then(() => {
+      .then((result) => {
+        const userInfo = {
+          name: result.user?.displayName,
+          email: result.user?.email,
+          photo: result.user?.photoURL,
+          role: role, // ✅ use selected role
+        };
+
+        useAxiosPublic.post("/users", userInfo).then(() => {});
         navigate(location?.state ? location.state : "/");
 
         Swal.fire({
@@ -41,13 +61,33 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    if (!role) {
+      Swal.fire({
+        icon: "warning",
+        title: "Role Required",
+        text: "Please select a role before logging in.",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
+
     const email = e.target.email.value;
     const password = e.target.password.value;
 
     userLogin(email, password)
       .then((result) => {
         const user = result.user;
-        setUser(user);
+
+        // ✅ Attach role to user object
+        const userInfo = {
+          name: user.displayName || "",
+          email: user.email,
+          photo: user.photoURL || "",
+          role: role,
+        };
+
+        setUser(userInfo);
+
         navigate(location?.state ? location.state : "/");
 
         Swal.fire({
@@ -72,12 +112,27 @@ const Login = () => {
 
   return (
     <div>
-      <section className=" pt-[10%] relative flex items-center justify-center p-2">
+      <section className="pt-[10%] relative flex items-center justify-center p-2">
         <div className="w-[500px] sm:w-[500px] bg-gray-900 bg-opacity-60 backdrop-blur-xl text-center p-8 text-white z-10 rounded-xl shadow-lg">
-        
           <p className="text-xl sm:text-2xl font-semibold">LOGIN HERE</p>
-
           <hr className="my-4 border-gray-600" />
+
+          {/* ✅ Role Selection */}
+          <div className="mb-4">
+            <label className="block text-left mb-2">Select Role:</label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              required
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="" disabled>
+                -- Select Role --
+              </option>
+              <option value="patient">Login as Patient</option>
+              <option value="doctor">Login as Doctor</option>
+            </select>
+          </div>
 
           <div className="text-center mt-6 mb-6">
             <button
@@ -101,7 +156,7 @@ const Login = () => {
               name="email"
               placeholder="Enter Your Email"
               required
-              className="w-full px-4 py-2 rounded-lg  text-base sm:text-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 rounded-lg text-base sm:text-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             <input
@@ -119,17 +174,15 @@ const Login = () => {
             <p className="mt-4 text-gray-300">
               If you're new here, click to{" "}
               <Link
-                to="/auth/signup"
+                to="/auth/register"
                 className="underline hover:text-pink-300 text-blue-400"
               >
-                SIGNUP
+                Register
               </Link>
             </p>
           </form>
         </div>
       </section>
-
- 
     </div>
   );
 };
