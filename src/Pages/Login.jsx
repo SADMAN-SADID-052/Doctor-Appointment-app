@@ -12,8 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const provider = new GoogleAuthProvider();
-
-  // ✅ Role state (no default value)
+  const axiosPublic = useAxiosPublic(); 
   const [role, setRole] = useState("");
 
   const handleGoogleLogin = () => {
@@ -33,10 +32,14 @@ const Login = () => {
           name: result.user?.displayName,
           email: result.user?.email,
           photo: result.user?.photoURL,
-          role: role, // ✅ use selected role
+          role: role,
         };
 
-        useAxiosPublic.post("/users", userInfo).then(() => {});
+      
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log("User stored in DB:", res.data);
+        });
+
         navigate(location?.state ? location.state : "/");
 
         Swal.fire({
@@ -78,7 +81,6 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
 
-        // ✅ Attach role to user object
         const userInfo = {
           name: user.displayName || "",
           email: user.email,
@@ -87,6 +89,11 @@ const Login = () => {
         };
 
         setUser(userInfo);
+
+       
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log("User stored in DB:", res.data);
+        });
 
         navigate(location?.state ? location.state : "/");
 
@@ -117,20 +124,20 @@ const Login = () => {
           <p className="text-xl sm:text-2xl font-semibold">LOGIN HERE</p>
           <hr className="my-4 border-gray-600" />
 
-          {/* ✅ Role Selection */}
+  
           <div className="mb-4">
             <label className="block text-left mb-2">Select Role:</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
               required
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500 bg-violet-400"
             >
               <option value="" disabled>
-                -- Select Role --
+                -- Select Role -- Login as : 
               </option>
-              <option value="patient">Login as Patient</option>
-              <option value="doctor">Login as Doctor</option>
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
             </select>
           </div>
 
