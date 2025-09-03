@@ -26,26 +26,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full fixed z-30 shadow-sm bg-white">
-      {/* 🔹 Top Contact Info Bar */}
-      <div className="hidden lg:flex justify-between items-center px-8 py-2 border-b text-sm text-gray-700">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <Phone className="w-4 h-4 text-blue-600" />
-            <div>
-              <p className="font-medium">+ (880) 1812-345-8070</p>
-              <p className="text-gray-700"> + (123) 1800-453-1546</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-blue-600" />
-            <span className="font-medium">Mon - Fri: 9:00AM - 5:00PM</span>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Mail className="w-4 h-4 text-blue-600" />
-          <span className="font-medium">https://www.mediclinic.com</span>
-        </div>
-      </div>
+
 
       <div className="navbar bg-white text-gray-800 px-6 lg:px-12">
         {/* Left: Logo */}
