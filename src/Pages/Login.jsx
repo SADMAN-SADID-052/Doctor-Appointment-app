@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-// import auth from "../Firebase/firebase.login";
+
 import auth from "../Firebase/firebaselogin"
 import Swal from "sweetalert2";
 
@@ -72,14 +72,14 @@ const Login = () => {
 
   return (
     <div>
-      <section className="bg-gray-800 pt-[10%] relative flex items-center justify-center p-2">
+      <section className=" pt-[10%] relative flex items-center justify-center p-2">
         <div className="w-[500px] sm:w-[500px] bg-gray-900 bg-opacity-60 backdrop-blur-xl text-center p-8 text-white z-10 rounded-xl shadow-lg">
         
           <p className="text-xl sm:text-2xl font-semibold">LOGIN HERE</p>
 
           <hr className="my-4 border-gray-600" />
 
-          <div className="text-center mt-6">
+          <div className="text-center mt-6 mb-6">
             <button
               onClick={handleGoogleLogin}
               className="bg-white p-2 text-black shadow-2xl rounded-md cursor-pointer hover:bg-blue-200"
@@ -101,7 +101,7 @@ const Login = () => {
               name="email"
               placeholder="Enter Your Email"
               required
-              className="w-full px-4 py-2 rounded-lg text-black text-base sm:text-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 rounded-lg  text-base sm:text-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             <input
