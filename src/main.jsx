@@ -9,6 +9,7 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import AuthProvider from "./Provider/AuthProvider";
 import Doctors from "./Pages/Doctors";
+import DashboardLayout from "./Layout/DashboardLayout";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -18,6 +19,8 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<Main></Main>} />
         <Route path="/doctors" element={<Doctors></Doctors>} />
+        <Route path="/dashboard" element={<DashboardLayout></DashboardLayout>} />
+
 
         <Route path="auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
