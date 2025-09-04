@@ -36,7 +36,7 @@ const Sidebar = () => {
             <Link to='/'>
               <img className='w-5'
                 // className='hidden md:block'
-                src='https://cdn-icons-png.freepik.com/256/7472/7472791.png?ga=GA1.1.94081497.1723952170&semt=ais_hybrid'
+                src='https://img.icons8.com/?size=160&id=2RkbxORaKjsw&format=png'
                 alt='logo'
                
               />
@@ -62,7 +62,7 @@ const Sidebar = () => {
           <div>
             <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-green-300 mx-auto'>
               <Link to='/'>
-                <img className="w-20" src=" https://cdn-icons-png.freepik.com/256/11875/11875514.png?ga=GA1.1.94081497.1723952170&semt=ais_hybrid"
+                <img className="w-20" src=" https://img.icons8.com/?size=160&id=2RkbxORaKjsw&format=png"
                   alt='logo'
                   width='100'
                   height='100'

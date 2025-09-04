@@ -1,20 +1,33 @@
 import MenuItem from "./Menuitem";
-import { CgProfile } from "react-icons/cg"
-import { MdAnnouncement } from "react-icons/md";
+import { MdBookmarkAdd } from "react-icons/md";
+import { ImAidKit } from "react-icons/im";
+import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 
 const PatientMenu = () => {
   return (
     <div>
-      <div className="flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform text-gray-600   cursor-pointer">
+      <div className="flex items-center  transition-colors duration-300 transform text-gray-600   cursor-pointer">
         <MenuItem
-          icon={MdAnnouncement}
+          icon={HiOutlineClipboardDocumentList}
           label="Doctor List"
           address="announcements"
         />
       </div>
-      <div className="flex items-center px-4 py-2  transition-colors duration-300 transform text-gray-600   cursor-pointer">
-        <MenuItem icon={CgProfile} label="Profile" address="" />
+      <div className="flex items-center  transition-colors duration-300 transform text-gray-600   cursor-pointer">
+        <MenuItem
+          icon={MdBookmarkAdd}
+          label="Book Appointment"
+          address="announcements"
+        />
       </div>
+      <div className="flex items-center  transition-colors duration-300 transform text-gray-600   cursor-pointer">
+        <MenuItem
+          icon={ImAidKit}
+          label="My Appointment"
+          address="announcements"
+        />
+      </div>
+      
     </div>
   );
 };

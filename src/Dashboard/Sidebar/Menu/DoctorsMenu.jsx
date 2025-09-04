@@ -1,7 +1,7 @@
-import { MdPayments } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
-import { MdAnnouncement } from "react-icons/md";
-import { MdWorkHistory } from "react-icons/md";
+import { MdOutlinePlaylistAdd } from "react-icons/md";
+
+import { LuListCheck } from "react-icons/lu";
+// import { MdWorkHistory } from "react-icons/md";
 import MenuItem from "./Menuitem";
 
 
@@ -9,17 +9,17 @@ const DoctorsMenu = () => {
   return (
     <div>
       <MenuItem
-        icon={MdAnnouncement}
-        label="Announcements"
+        icon={MdOutlinePlaylistAdd}
+        label="Appointment List"
         address="announcements"
       />
-      <MenuItem icon={MdPayments} label="Make Payment" address="" />
+      {/* <MenuItem icon={} label="Make Payment" address="" /> */}
       <MenuItem
-        icon={MdWorkHistory}
-        label="Payment History"
+        icon={LuListCheck}
+        label="Appointment Management"
         address="payHistory"
       />
-      <MenuItem icon={CgProfile} label="Profile" address="" />
+      {/* <MenuItem icon={CgProfile} label="Profile" address="" /> */}
     </div>
   );
 };
